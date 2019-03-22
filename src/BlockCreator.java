@@ -1,9 +1,12 @@
 import java.io.PrintWriter;
 
-public class BlockCreator {
+class BlockCreator {
 
 
     void createTable(PrintWriter writer, int countSquares, int pixelSize) {
+
+        ColorOffset offset = new ColorOffset();
+
         writer.println("<table>\n");
 
         int td;
@@ -22,17 +25,18 @@ public class BlockCreator {
         }
         for (int i = 0; i < tr; i++) {
             writer.println("<tr>\n");
+            String[] arrayWithOffset = offset.getArrayWithOffset(i, td);
             for (int j = 0; j < td; j++) {
-                writer.println("<td></td>\n");
+                writer.println("<td bgcolor=\"" + arrayWithOffset[j] + "\"></td>\n");
             }
-            writer.println("/tr>\n");
+            writer.println("</tr>\n");
         }
-
+        writer.println("</table>");
 
     }
 
     void createStyle(PrintWriter writer, int pixelSize) {
         writer.println("<style>\ntd {\nwidth: " + pixelSize + "px;\nheight: "
-                + pixelSize + "px;\n</style>");
+                + pixelSize + "px;}\n</style>");
     }
 }

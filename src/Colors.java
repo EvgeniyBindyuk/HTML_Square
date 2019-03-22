@@ -11,15 +11,11 @@ class Colors {
     final String GREEN1 = "dbe463";
     final String GREEN2 = "b6de61";
     final String GREEN3 = "9dd16c";
-    final String GREEN4 = "8dbe6c";
     final String BLUE1 = "81b495";
     final String BLUE2 = "6ca0b5";
     final String BLUE3 = "5b8dd4";
-    final String BLUE4 = "5062e8";
     final String PURPLE1 = "563bb0";
-    final String PURPLE2 = "6031a3";
-    final String PURPLE3 = "5c238c";
-    final String PURPLE4 = "641e80";
-    final String PURPLE5 = "691d82";
+    final String PURPLE2 = "641e80";
+    final String PURPLE3 = "691d82";
 
 }

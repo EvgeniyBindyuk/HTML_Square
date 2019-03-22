@@ -2,7 +2,46 @@
 import java.util.ArrayList;
 
 class ColorList {
-    static ArrayList<String> list = new ArrayList<>(22);
+    static ArrayList<String> list = new ArrayList<>(18);
+
+    String[] getColors(int td) {
+        String[] colors = new String[td];
+        int oneColor;
+        int remaind;
+        if (td > list.size()) {
+            remaind = td % list.size();
+            oneColor = (int) Math.round((double) td / list.size());
+            int a = 0;
+            int b = 1;
+            boolean flag = false;
+            for (int i = 0; i < colors.length; i++) {
+                colors[i] = list.get(a);
+                b++;
+                if (b == oneColor) {
+                    if ((double) a % 2 == 0) {
+                        flag = true;
+                        b = oneColor - 1;
+                    } else {
+                        b = 1;
+                    }
+                    if (remaind > 0 && flag) {
+                        flag = false;
+                        remaind--;
+                    } else {
+                        a++;
+                    }
+                }
+            }
+        } else {
+            oneColor = (int) Math.floor((double) list.size() / td);
+            int a = 0;
+            for (int i = 0; i < colors.length; i++) {
+                colors[i] = list.get(a);
+                a += oneColor;
+            }
+        }
+        return colors;
+    }
 
     static {
         Colors colors = new Colors();
@@ -21,17 +60,13 @@ class ColorList {
         list.add(colors.GREEN1);
         list.add(colors.GREEN2);
         list.add(colors.GREEN3);
-        list.add(colors.GREEN4);
 
         list.add(colors.BLUE1);
         list.add(colors.BLUE2);
         list.add(colors.BLUE3);
-        list.add(colors.BLUE4);
 
         list.add(colors.PURPLE1);
         list.add(colors.PURPLE2);
         list.add(colors.PURPLE3);
-        list.add(colors.PURPLE4);
-        list.add(colors.PURPLE5);
     }
 }
