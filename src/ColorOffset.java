@@ -1,25 +1,22 @@
-
-
 import java.util.Arrays;
 
- class ColorOffset {
+class ColorOffset {
 
     private ColorList list = new ColorList();
 
-    String[] getArrayWithOffset(int offset, int td) {
-        int offsetReal = offset;
-        if (offset > ColorList.list.size()) {
-            offsetReal = offset % ColorList.list.size();
+    String[] getArrayWithOffset(int offset, int SquaresInRow) {
+        if (offset >= ColorList.list.size()) {
+            offset = offset % ColorList.list.size();
         }
-        if (offset > 0) {
-            String[] colors = list.getColors(td);
-            String[] strings = Arrays.copyOfRange(colors, 0, offsetReal);
-            String[] strings1 = Arrays.copyOfRange(colors, offsetReal, colors.length);
-            String[] finalArray = new String[strings.length + strings1.length];
-            System.arraycopy(strings1, 0, finalArray, 0, strings1.length);
-            System.arraycopy(strings, 0, finalArray, strings1.length, strings.length);
-            return finalArray;
-        } else return list.getColors(td);
+        if (offset > 0 && offset < SquaresInRow) {
+            String[] colors = list.getColorsInRow(SquaresInRow);
+            String[] partOne = Arrays.copyOfRange(colors, 0, offset);
+            String[] partTwo = Arrays.copyOfRange(colors, offset, colors.length);
+            String[] finalColorsArray = new String[partOne.length + partTwo.length];
+            System.arraycopy(partTwo, 0, finalColorsArray, 0, partTwo.length);
+            System.arraycopy(partOne, 0, finalColorsArray, partTwo.length, partOne.length);
+            return finalColorsArray;
+        } else return list.getColorsInRow(SquaresInRow);
     }
 
 }

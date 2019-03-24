@@ -2,42 +2,43 @@
 import java.util.ArrayList;
 
 class ColorList {
-    static ArrayList<String> list = new ArrayList<>(18);
 
-    String[] getColors(int td) {
+    static ArrayList<String> list = new ArrayList<>();
+
+    String[] getColorsInRow(int td) {
         String[] colors = new String[td];
-        int oneColor;
-        int remaind;
+        int oneColorSquares;
+        int remaindColors;
         if (td > list.size()) {
-            remaind = td % list.size();
-            oneColor = (int) Math.round((double) td / list.size());
-            int a = 0;
-            int b = 1;
+            remaindColors = td % list.size();
+            oneColorSquares = (int) Math.round((double) td / list.size());
+            int remaindCounter = 0;
+            int oneColorCounter = 0;
             boolean flag = false;
             for (int i = 0; i < colors.length; i++) {
-                colors[i] = list.get(a);
-                b++;
-                if (b == oneColor) {
-                    if ((double) a % 2 == 0) {
+                colors[i] = list.get(remaindCounter);
+                oneColorCounter++;
+                if (oneColorCounter == oneColorSquares && remaindCounter <= 18) {
+                    if ((double) i % 2 == 0 && i != 0 && !flag) {
                         flag = true;
-                        b = oneColor - 1;
+                        oneColorCounter = oneColorSquares - 1;
                     } else {
-                        b = 1;
+                        oneColorCounter = 0;
                     }
-                    if (remaind > 0 && flag) {
+                    if (remaindColors > 0 && flag) {
                         flag = false;
-                        remaind--;
+                        remaindColors--;
                     } else {
-                        a++;
+                        remaindCounter++;
                     }
                 }
             }
         } else {
-            oneColor = (int) Math.floor((double) list.size() / td);
+            oneColorSquares = (int) Math.floor((double) list.size() / td);
             int a = 0;
             for (int i = 0; i < colors.length; i++) {
                 colors[i] = list.get(a);
-                a += oneColor;
+                a += oneColorSquares;
             }
         }
         return colors;
